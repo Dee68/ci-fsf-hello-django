@@ -8,5 +8,35 @@
 </head>
 <body>
     <h1>Things I want todo</h1>
+    <a href="{% url 'todo:add' %}">Add Item</a>
+    <table>
+        <!-- <tr>
+            <th>Name</th>
+            <th>Status</th>
+        </tr> -->
+        {% for item in items %}
+            <tr>
+                {% if item.done %}
+                <td><strike>{{ item.name }}</strike></td>
+                {% else %}
+                <td>{{ item.name}}</td>
+                {% endif %}
+                <td>
+                    <a href="toggle/{{ item.id }}"><button>Toggle Item</button></a>
+                </td>
+                <td>
+                    <a href="edit/{{ item.id }}"><button>Edit Item</button></a>
+                </td>
+                <td>
+                    <a href="delete/{{ item.id }}"><button>Delete Item</button></a>
+                </td>
+
+            </tr>
+        {% empty %}
+        <tr>
+            <td>You have nothing to do.</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
